@@ -13,12 +13,12 @@
     "issues": "https://github.com/Roundaround/mc-fabric-window-size/issues"
   },
   "license": "MIT",
+  "environment": "client",
   "custom": {
     "loom:injected_interfaces": {
-      "net/minecraft/class_446": [
+      "net/minecraft/client/gui/screens/options/VideoSettingsScreen": [
         "me/roundaround/windowsize/VideoOptionsScreenExtensions"
       ]
     }
-  },
-  "environment": "client"
+  }
 }
