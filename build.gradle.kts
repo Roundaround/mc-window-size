@@ -10,7 +10,7 @@ allay {
   homepage.set("https://modrinth.com/mod/window-size")
   repository.set("https://github.com/Roundaround/mc-fabric-window-size")
   issues.set("https://github.com/Roundaround/mc-fabric-window-size/issues")
-  logoFile.set("assets/windowsize/icon.png")
+  logoFile.set("assets/windowsize/banner.png")
 
   modrinth {
     projectId.set("window-size")
