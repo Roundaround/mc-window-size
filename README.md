@@ -6,7 +6,7 @@
 
 [![Modrinth Downloads](https://img.shields.io/modrinth/dt/window-size?style=flat&logo=modrinth&color=00AF5C)](https://modrinth.com/mod/window-size)
 [![CurseForge Downloads](https://img.shields.io/curseforge/dt/1506384?style=flat&logo=curseforge&color=F16436)](https://www.curseforge.com/minecraft/mc-mods/window-size)
-[![GitHub Repo stars](https://img.shields.io/github/stars/Roundaround/mc-fabric-window-size?style=flat&logo=github)](https://github.com/Roundaround/mc-fabric-window-size)
+[![GitHub Repo stars](https://img.shields.io/github/stars/Roundaround/mc-window-size?style=flat&logo=github)](https://github.com/Roundaround/mc-window-size)
 
 [![Support me on Ko-fi](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/donate/kofi-singular-alt_vector.svg)](https://ko-fi.com/roundaround)
 

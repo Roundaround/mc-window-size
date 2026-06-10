@@ -8,12 +8,16 @@ allay {
   authors.set(listOf("Roundaround"))
   license.set("MIT")
   homepage.set("https://modrinth.com/mod/window-size")
-  repository.set("https://github.com/Roundaround/mc-fabric-window-size")
-  issues.set("https://github.com/Roundaround/mc-fabric-window-size/issues")
+  repository.set("https://github.com/Roundaround/mc-window-size")
+  issues.set("https://github.com/Roundaround/mc-window-size/issues")
   logoFile.set("assets/windowsize/banner.png")
 
   modrinth {
     projectId.set("window-size")
+  }
+
+  curseforge {
+    projectId.set(1506384)
   }
 
   release {
