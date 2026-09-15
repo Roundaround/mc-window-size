@@ -30,7 +30,7 @@ public abstract class MinecraftMixin {
 
   @Inject(method = "resizeGui", at = @At("RETURN"))
   private void afterResolutionChanged(CallbackInfo ci) {
-    if (this.window.isFullscreen()) {
+    if (((WindowAccessor) (Object) this.window).getFullscreen()) {
       return;
     }
 

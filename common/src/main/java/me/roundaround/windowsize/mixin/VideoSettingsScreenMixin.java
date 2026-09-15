@@ -1,5 +1,6 @@
 package me.roundaround.windowsize.mixin;
 
+import org.spongepowered.asm.mixin.Shadow;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.platform.Monitor;
 import com.mojang.blaze3d.platform.Window;
@@ -35,6 +36,10 @@ public abstract class VideoSettingsScreenMixin extends OptionsSubScreen implemen
   @Unique
   private boolean dirty;
 
+  @Shadow
+  @Nullable
+  private Monitor fullscreenModeMonitor;
+
   @Inject(
       method = "addOptions", at = @At(
       value = "INVOKE",
@@ -43,8 +48,9 @@ public abstract class VideoSettingsScreenMixin extends OptionsSubScreen implemen
       shift = At.Shift.AFTER
   )
   )
-  private void afterFullscreenResolutionOptionAdded(CallbackInfo ci, @Local Monitor monitor, @Local Window window) {
-    this.resolutions = this.getAvailableResolutions(monitor);
+  private void afterFullscreenResolutionOptionAdded(CallbackInfo ci, @Local Window window) {
+    // 26.3 keeps the monitor in a field instead of a local.
+    this.resolutions = this.getAvailableResolutions(this.fullscreenModeMonitor);
 
     this.resolutionOption = new OptionInstance<>(
         "windowsize.options.resolution", OptionInstance.noTooltip(), (optionText, value) -> {
@@ -95,7 +101,7 @@ public abstract class VideoSettingsScreenMixin extends OptionsSubScreen implemen
       return;
     }
 
-    if (!window.isFullscreen()) {
+    if (!((WindowAccessor) (Object) window).getFullscreen()) {
       window.setWindowed(resolution.width(), resolution.height());
     } else {
       ((WindowAccessor) (Object) window).setWindowedWidth(resolution.width());
