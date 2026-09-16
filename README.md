@@ -1,17 +1,37 @@
 ![Window Size](https://imgur.com/j8nUpzX.png)
 
-![](https://img.shields.io/badge/Loader-Fabric%20|%20NeoForge%20|%20Forge-313e51?style=for-the-badge)
-![](https://img.shields.io/badge/MC-26.3%20|%2026.2%20|%2026.1%20|%201.21-313e51?style=for-the-badge)
-![](https://img.shields.io/badge/Side-Client-313e51?style=for-the-badge)
-
 [![Modrinth Downloads](https://img.shields.io/modrinth/dt/window-size?style=flat&logo=modrinth&color=00AF5C)](https://modrinth.com/mod/window-size)
 [![CurseForge Downloads](https://img.shields.io/curseforge/dt/1506384?style=flat&logo=curseforge&color=F16436)](https://www.curseforge.com/minecraft/mc-mods/window-size)
 [![GitHub Repo stars](https://img.shields.io/github/stars/Roundaround/mc-window-size?style=flat&logo=github)](https://github.com/Roundaround/mc-window-size)
 
 [![Support me on Ko-fi](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/donate/kofi-singular-alt_vector.svg)](https://ko-fi.com/roundaround)
 
----
+Permanently change Minecraft's windowed size by just resizing the window — no editing `options.txt`.
 
-Permanently modify the Minecraft game's (non-fullscreen) window size without having to edit options.txt! Simply resizing the window will automatically update the `overrideWidth` and `overrideHeight` properties in your options.txt, plus the video options screen in game will have a new slider for windowed resolution!
+## Installing
 
-![Screenshot](https://cdn.modrinth.com/data/hfMaJXAJ/images/69407dd8240a6ec4edbc2f01f07f98ef976e3286.png)
+Grab a build from [Modrinth](https://modrinth.com/mod/window-size) or [CurseForge](https://www.curseforge.com/minecraft/mc-mods/window-size). Fabric builds need [Fabric API](https://modrinth.com/mod/fabric-api).
+
+## Building from source
+
+```sh
+./gradlew build
+```
+
+Dev runs are per loader: `:fabric:runClient`, `:neoforge:runClient`, `:forge:runClient`, and the `runServer` equivalents. Game tests run with `./gradlew :fabric:runClientGameTests` and `:fabric:runServerGameTests`.
+
+The build is an [Allay](https://github.com/Roundaround/allay) consumer and bundles [Trove](https://github.com/Roundaround/trove).
+
+Shared code lives in `common/` and is added to each loader subproject via `srcDir`.
+
+## Contributing
+
+Issues and pull requests are welcome at [the issue tracker](https://github.com/Roundaround/mc-window-size/issues).
+
+- Branch from `main`, which tracks the newest supported Minecraft version. Older lines live on their own version-named branches.
+- Keep loader-agnostic code in `common/`; only genuinely loader-specific glue belongs in a loader subproject.
+- Run `./gradlew build` plus the Fabric game tests before opening a PR, and add a changelog entry under `changelogs/` named for the version you're targeting.
+
+## License
+
+[MIT](LICENSE)
