@@ -14,6 +14,7 @@ import net.minecraft.client.gui.screens.options.OptionsSubScreen;
 import net.minecraft.client.gui.screens.options.VideoSettingsScreen;
 import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.Nullable;
+import org.lwjgl.sdl.SDLVideo;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -102,7 +103,8 @@ public abstract class VideoSettingsScreenMixin extends OptionsSubScreen implemen
     }
 
     if (!((WindowAccessor) (Object) window).getFullscreen()) {
-      window.setWindowed(resolution.width(), resolution.height());
+      // size only — Window.setWindowed also re-requests the position, and some compositors revert the pair
+      SDLVideo.SDL_SetWindowSize(window.handle(), resolution.width(), resolution.height());
     } else {
       ((WindowAccessor) (Object) window).setWindowedWidth(resolution.width());
       ((WindowAccessor) (Object) window).setWindowedHeight(resolution.height());
