@@ -34,20 +34,26 @@ public class WindowSizePickerTest implements ClientTest {
 
     int[] before = context.computeOnClient(WindowSizePickerTest::screenSize);
 
-    // a fifth of the way along the slider — a small mode that fits any desktop
-    context.runOnClient((mc) -> slider.onClick(
-        new MouseButtonEvent(
-            slider.getX() + slider.getWidth() * 0.2,
-            slider.getY() + slider.getHeight() / 2.0,
-            new MouseButtonInfo(InputConstants.MOUSE_BUTTON_LEFT, 0)
-        ), false
-    ));
-    // slider values apply on a 600ms debounce
-    context.waitTicks(30);
+    // small modes that fit any desktop; the second covers a window already at the first
+    int[] picked = before;
+    for (double fraction : new double[]{0.2, 0.4}) {
+      context.runOnClient((mc) -> slider.onClick(
+          new MouseButtonEvent(
+              slider.getX() + slider.getWidth() * fraction,
+              slider.getY() + slider.getHeight() / 2.0,
+              new MouseButtonInfo(InputConstants.MOUSE_BUTTON_LEFT, 0)
+          ), false
+      ));
+      // slider values apply on a 600ms debounce
+      context.waitTicks(30);
 
-    int[] picked = context.computeOnClient((mc) -> new int[]{mc.options.overrideWidth, mc.options.overrideHeight});
+      picked = context.computeOnClient((mc) -> new int[]{mc.options.overrideWidth, mc.options.overrideHeight});
+      if (picked[0] != before[0] || picked[1] != before[1]) {
+        break;
+      }
+    }
     if (picked[0] == before[0] && picked[1] == before[1]) {
-      throw new GameTestAssertionException("slider click did not pick a new size: " + picked[0] + "x" + picked[1]);
+      throw new GameTestAssertionException("slider clicks did not pick a new size: " + picked[0] + "x" + picked[1]);
     }
 
     context.runOnClient((mc) -> mc.gui.screen().onClose());
